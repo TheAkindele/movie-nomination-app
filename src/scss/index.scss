@@ -1,5 +1,10 @@
 @import "./button.scss";
+@import "./screens.scss";
 
 .result {
   width: 48%;
+  @include screen("inbetween") {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
 }

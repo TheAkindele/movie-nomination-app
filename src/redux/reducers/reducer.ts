@@ -1,17 +1,22 @@
 import * as types from "../types"
 
 const initialState = {
-    searchResult: [],
-    loading: false
+    data: [],
+    keyword: "",
+    loading: false,
+    movie: {}
 }
 
-export const searchMovie = (state = initialState, { type, payload }: any) => {
+const searchMovie = (state = initialState, { type, payload }: any) => {
     switch (type) {
         case types.SEARCH_MOVIE_REQUEST:
             return {...state, loading: true}
         
         case types.SEARCH_MOVIE_SUCCESS:
-            return {...state, loading: false, payload}
+            return {...state, loading: false, ...payload}
+        
+        case types.NOMINATE_MOVIE:
+            return {...state, movie: payload}
 
         case types.SEARCH_MOVIE_FAILURE:
             return {...state, loading: false, payload}
@@ -20,3 +25,6 @@ export const searchMovie = (state = initialState, { type, payload }: any) => {
             return state
     }
 }
+
+
+export default searchMovie
