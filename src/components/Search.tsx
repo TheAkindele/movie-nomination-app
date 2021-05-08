@@ -19,8 +19,16 @@ export const Search = (props: Props) => {
         setValue("")
     }
 
+    const submitForm = (e: any) => {
+        e.preventDefault()
+        searchMovie()
+    }
+
     return (
-        <form className="w-100 py-4 px-8 shadow-xl border rounded mb-8">
+        <form 
+            className="w-100 py-4 px-8 shadow-xl border rounded mb-8"
+            onSubmit={submitForm}
+        >
             <label className="">Movie Search</label>
             <div className="w-100 search-box flex items-center justify-center border rounded mt-3">  
                 <input 
@@ -30,14 +38,14 @@ export const Search = (props: Props) => {
                     className="w-10/12 md:w-11/12 h-10 outline-none mx-2"
                     onChange={(e: any) => setValue(e.target.value)}
                 />
-                <div 
+                <button 
                     className="icon w-2/12 md:w-1/12 h-10 flex items-center justify-center cursor-pointer border bg-yellow-400"
-                    onClick={() => searchMovie()}
+                    type="submit"
                 >
                     <img src="/search.svg" alt="search icon" 
                         className="w-100 h-5 cursor-pointer"
                     />
-                </div>
+                </button>
             </div>
         </form>
     )

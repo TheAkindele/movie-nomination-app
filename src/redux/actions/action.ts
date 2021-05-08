@@ -18,10 +18,10 @@ export const SearchMovie =  () => {
             })
         })
 
-        .catch((error: any) => {
+        .catch((err: any) => {
             dispatch({
                 type: types.SEARCH_MOVIE_FAILURE,
-                payload: error
+                payload: err?.error
             })
         })
     }
@@ -29,8 +29,6 @@ export const SearchMovie =  () => {
 
 export const NominateMovie = () => {
     return (movie?: any) => (dispatch: Dispatch) => {
-        //console.log("selected== ", movie);
-        
         dispatch({type: types.NOMINATE_MOVIE, payload: movie})
     }
 }

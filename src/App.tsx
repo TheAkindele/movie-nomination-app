@@ -1,5 +1,5 @@
 import React from 'react'
-import { Search, Result, Nominations, Loader} from "./components"
+import { Search, Result, Nominations} from "./components"
 
 interface Props {
     

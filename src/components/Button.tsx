@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React from 'react'
 import {Loader} from "./Loader"
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
     onClick?: ()=>void;
 }
 
-export const Button: FC<Props> = ({ text, type, loading, disabled, className, onClick, ...rest }) => {
+export const Button= ({ text, type, loading, disabled, className, onClick, ...rest }: Props) => {
     return (
         <button 
             type={type || undefined}
