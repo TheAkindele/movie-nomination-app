@@ -1,17 +1,30 @@
-import React from 'react'
+import React, {useState, useMemo} from 'react'
 import {Button} from "./Button"
 import {Loader} from "./Loader"
 import {useSelector, useDispatch} from "react-redux"
 import {NominateMovie} from "../redux/actions/action"
 
-interface Props {
-}
 
 export const Result = () => {
+    const [result, setResult] = useState<any[]>()
+
     const dispatch = useDispatch()
     const _nominateMovie = NominateMovie()
 
-    const {data, keyword, loading} = useSelector((state: any) => state.search)
+    const {searchResult, keyword, loading, nominatedMovies} = useSelector((state: any) => state.search)
+
+    const displayAlert = () => alert("maximum number of nominations reached")
+    
+
+    useMemo(() => {
+        setResult(searchResult)
+    }, [result, searchResult, nominatedMovies])
+
+    const dispatchAction = (Title: any, Year: any, imdbID: any) => {
+        if (nominatedMovies.length === 5) displayAlert()
+        else  dispatch(_nominateMovie({Title, Year, imdbID}))
+    }
+
 
     return (
         <div className="result border rounded py-4 px-1 md:p-8">
@@ -25,17 +38,24 @@ export const Result = () => {
             )
              : (
                 <ul>
-                    {data?.map(({Title, Year, imdbID}: any, i: any) => (
-                        <div className="flex mb-4 md:mb-3 ml-2 " key={i} >
+                    {result?.map((movie: any) => (
+                        <div className="flex mb-4 md:mb-3 ml-2 " key={movie?.imdbID} >
                             <li className="w-full mr-2 flex justify-between items-center">
-                                <p className="w-9/12 mr-2">{Title}</p>
-                                <p className="w-2/12 text-center mr-2 text-red-400">{Year}</p>
+                                <p className="w-9/12 mr-2">{movie?.Title}</p>
+                                <p className="w-2/12 text-center mr-2 text-red-400">{movie?.Year}</p>
 
-                                <Button
-                                    text="Nominate"
-                                    className=" ml-2 w-1/12"
-                                    onClick={() => dispatch(_nominateMovie({Title, Year, imdbID}))}
+                                { nominatedMovies?.some((item: any) => item.imdbID === movie.imdbID) ? (
+                                    <Button
+                                    text="Nominated"
+                                    className="faded"
                                 />
+                                ) : (
+                                    <Button
+                                    text="Nominate"
+                                    className="ml-2 w-1/12"
+                                    onClick={() => dispatchAction(movie?.Title, movie?.Year, movie?.imdbID)}
+                                />
+                                )}
                             </li>
                         </div>
                     ))}
@@ -44,3 +64,5 @@ export const Result = () => {
         </div>
     )
 }
+
+

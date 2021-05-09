@@ -12,7 +12,7 @@ export const SearchMovie =  () => {
             dispatch({
                 type: types.SEARCH_MOVIE_SUCCESS,
                 payload: {
-                    data: [...data],
+                    searchResult: [...data],
                     keyword: keyword
                 }
             })
@@ -30,6 +30,12 @@ export const SearchMovie =  () => {
 export const NominateMovie = () => {
     return (movie?: any) => (dispatch: Dispatch) => {
         dispatch({type: types.NOMINATE_MOVIE, payload: movie})
+    }
+}
+
+export const RemoveNominated = () => {
+    return (movie?: any) => (dispatch: Dispatch) => {
+        dispatch({type: types.REMOVE_NOMINATED, payload: movie})
     }
 }
 

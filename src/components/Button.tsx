@@ -4,7 +4,7 @@ import {Loader} from "./Loader"
 interface Props {
     text?: string;
     type?: any;
-    disabled?: boolean;
+    disabled?: Boolean;
     loading?: boolean;
     className?: string;
     rest?: any;

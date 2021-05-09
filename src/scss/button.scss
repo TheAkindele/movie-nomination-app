@@ -2,14 +2,15 @@
 @import "./screens.scss";
 
 .button{
-    min-width: 5rem;
-    padding: 0.5rem;
+    min-width: 5.5rem;
+    padding: 0.5rem 0.3rem;
     cursor: pointer;
     background-color: rgb(92, 202, 245);
     border-radius: 4px;
     border: none;
     outline: none;
     color: white;
+    outline: none;
 
         &:hover{
         background-color: rgb(142, 236, 248);
@@ -31,5 +32,11 @@
         opacity: 50%;
         cursor: default;
         pointer-events: none;
+    }
+    &.faded{
+        opacity: 50%;
+        cursor: default;
+        pointer-events: none;
+        background-color: gray;
     }
 }

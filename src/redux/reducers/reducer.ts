@@ -1,10 +1,10 @@
 import * as types from "../types"
 
 const initialState = {
-    data: [],
+    searchResult: [],
     keyword: "",
     loading: false,
-    movie: {}
+    nominatedMovies: []
 }
 
 const searchMovie = (state = initialState, { type, payload }: any) => {
@@ -14,12 +14,15 @@ const searchMovie = (state = initialState, { type, payload }: any) => {
         
         case types.SEARCH_MOVIE_SUCCESS:
             return {...state, loading: false, ...payload}
-        
-        case types.NOMINATE_MOVIE:
-            return {...state, movie: payload}
 
         case types.SEARCH_MOVIE_FAILURE:
             return {...state, loading: false, payload}
+
+        case types.NOMINATE_MOVIE:
+            return {...state, nominatedMovies: [...state?.nominatedMovies, payload]}
+
+        case types.REMOVE_NOMINATED:
+            return {...state, nominatedMovies: payload}
 
         default:
             return state
