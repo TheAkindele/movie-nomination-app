@@ -5,8 +5,8 @@ import { Dispatch } from "redux";
 export const SearchMovie =  () => {
     return (keyword?: any) => (dispatch: Dispatch) => {
         dispatch({type: types.SEARCH_MOVIE_REQUEST})
-
-        axios.get(`http://www.omdbapi.com/?apikey=4a6c6b7c&s=${keyword}`)
+        const proxyUrl = "https://limitless-mountain-31284.herokuapp.com/";
+        axios.get(`${proxyUrl}http://www.omdbapi.com/?apikey=4a6c6b7c&s=${keyword}`)
         .then((response: any) => {
             const data = response?.data?.Search
             dispatch({
@@ -16,7 +16,7 @@ export const SearchMovie =  () => {
                     keyword: keyword
                 }
             })
-        })
+        })  //utility.action // proxy
 
         .catch((err: any) => {
             dispatch({
